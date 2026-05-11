@@ -16,7 +16,7 @@ function BrandMark() {
   return (
     <div
       aria-hidden
-      className="relative h-9 w-9 overflow-hidden rounded-full border border-primary/20 bg-white"
+      className="relative h-9 w-9 overflow-hidden rounded-full border border-primary/20 bg-white shadow-md shadow-primary/15"
     >
       <span className="absolute inset-y-1 left-1 w-1/2 rounded-full bg-secondary [clip-path:ellipse(88%_76%_at_96%_50%)]" />
       <span className="absolute inset-y-1 right-1 w-1/2 rounded-full bg-primary [clip-path:ellipse(88%_76%_at_4%_50%)]" />
@@ -26,7 +26,7 @@ function BrandMark() {
 
 export default function Navbar({ brandName, navItems, whatsappHref }: NavbarProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-[#D8E0E2] bg-white/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-[#D8E0E2] bg-white/95 shadow-sm shadow-primary/5 backdrop-blur-sm">
       <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6">
         <Link href="#home" className="flex items-center gap-3">
           <BrandMark />
@@ -44,7 +44,7 @@ export default function Navbar({ brandName, navItems, whatsappHref }: NavbarProp
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm font-medium text-foreground transition hover:text-primary"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:-translate-y-0.5 hover:bg-light hover:text-primary hover:shadow-md hover:shadow-primary/10"
                 >
                   {item.label}
                 </Link>
@@ -58,7 +58,7 @@ export default function Navbar({ brandName, navItems, whatsappHref }: NavbarProp
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#C2851F]"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-accent/25 transition hover:-translate-y-0.5 hover:bg-[#C2851F] hover:shadow-lg"
           >
             Solicitar cotización
           </a>

@@ -197,3 +197,123 @@ Registrar el contexto de trabajo de esta sesión: qué pidió el usuario en cada
 - Contacto orientado a cotización con WhatsApp y correo.
 - Datos de productos centralizados en `src/data/products.ts`.
 - Base accesible y SEO inicial configurada en metadata.
+
+---
+
+### 7) Prompt: agregar captcha, envío de correo configurable, sombras/hover e imágenes configurables
+
+**Pedido**
+- La opción de comunicación del formulario de contacto debe usar captcha para evitar spam.
+- El botón “Enviar solicitud” debe permitir enviar el mensaje por email de forma configurable.
+- El email generado debe ser legible.
+- Mejorar sombras y estados hover del navbar y botones según la paleta.
+- Agregar una forma de incluir imágenes en la parte principal y en el resto de la página.
+- Actualizar prompts/instrucciones relacionadas.
+
+**Acciones**
+- Se agregó `/api/contact` para procesar solicitudes del formulario.
+- Se agregó `/api/contact/captcha` para generar una pregunta matemática con token firmado.
+- Se agregó validación server-side de campos requeridos, email, captcha, honeypot, tiempo mínimo de envío y rate limit básico.
+- Se agregó envío configurable por Resend mediante variables de entorno, sin agregar dependencias nuevas.
+- Se convirtió `ContactSection` en formulario interactivo con estados de carga, éxito y error.
+- Se creó `src/data/site.ts` para centralizar empresa, navegación, servicios e imágenes de página.
+- Se agregaron slots opcionales de imagen para Hero, About, Contact, servicios y categorías de producto.
+- Se mejoraron sombras y estados hover en navbar, menú móvil, CTA, cards, formulario y botones.
+- Se agregó `.env.example`.
+- Se actualizó `AGENTS.md` con las reglas vigentes de contacto e imágenes.
+
+**Archivos creados**
+- `.env.example`
+- `src/app/api/contact/route.ts`
+- `src/app/api/contact/captcha/route.ts`
+- `src/data/site.ts`
+- `src/lib/contact-captcha.ts`
+- `src/lib/contact-email.ts`
+
+**Archivos modificados**
+- `AGENTS.md`
+- `docs/session-prompts-actions-summary.md`
+- `src/app/page.tsx`
+- `src/components/About.tsx`
+- `src/components/ContactSection.tsx`
+- `src/components/CTASection.tsx`
+- `src/components/Hero.tsx`
+- `src/components/MobileMenu.tsx`
+- `src/components/Navbar.tsx`
+- `src/components/ProductCategories.tsx`
+- `src/components/Services.tsx`
+- `src/data/products.ts`
+
+---
+
+### 8) Prompt: ajustar envío real de correos con Resend para pruebas locales
+
+**Pedido**
+- Ajustar el formulario de contacto para que `CONTACT_EMAIL_PROVIDER=disabled` valide y simule éxito.
+- Hacer que `CONTACT_EMAIL_PROVIDER=resend` envíe correos reales mediante Resend.
+- Requerir `RESEND_API_KEY`, `CONTACT_EMAIL_FROM` y `CONTACT_EMAIL_TO` cuando Resend esté activo.
+- Devolver respuestas JSON consistentes con `success` y `message`.
+- Mantener validaciones, captcha y protecciones anti-spam.
+- Mantener mensajes visibles en español y no exponer secretos al cliente.
+- Documentar la configuración para pruebas locales con inbox de prueba.
+
+**Acciones**
+- Se cambió el contrato de `/api/contact` a `{ success: boolean, message: string }`.
+- Se hizo que el proveedor `disabled` simule éxito después de validar el formulario.
+- Se reforzó el proveedor `resend` para validar variables de entorno antes de enviar.
+- Se agregó manejo seguro de errores de conexión y errores devueltos por Resend.
+- Se ajustó el asunto a `Nueva solicitud de cotización - Plus Tecnología`.
+- Se mejoró el contenido text/html del correo con nombre, empresa, correo, teléfono/WhatsApp, tipo de necesidad, mensaje y fecha/hora.
+- Se mantiene `reply_to` con el correo del visitante.
+- Se actualizó `ContactSection` para leer el nuevo contrato JSON.
+- Se reemplazó el ejemplo de API key en `.env.example` por un placeholder.
+
+**Archivos creados**
+- Ninguno.
+
+**Archivos modificados**
+- `.env.example`
+- `docs/session-prompts-actions-summary.md`
+- `src/app/api/contact/route.ts`
+- `src/components/ContactSection.tsx`
+- `src/lib/contact-email.ts`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: OK con permiso de red para descarga de fuentes Google.
+
+---
+
+### 9) Prompt: refactorizar captcha visual y reforzar validaciones del formulario
+
+**Pedido**
+- Leer primero los cambios locales, incluyendo el contexto de `.env.local` sin exponer secretos.
+- Reemplazar el captcha textual por una imagen pequeña con una suma legible para humanos.
+- Generar la imagen de captcha según los números seleccionados.
+- Mantener la verificación por suma: el usuario debe ingresar el resultado.
+- Agregar validaciones para campos vacíos, estructura de correo, teléfono sin letras y solo caracteres válidos.
+- Mantener protecciones anti-spam existentes.
+- Actualizar la bitácora.
+
+**Acciones**
+- Se revisó el estado del repositorio y se inspeccionaron las claves de `.env.local` con valores ocultos.
+- Se refactorizó `src/lib/contact-captcha.ts` para generar una imagen SVG inline con patrón, ruido visual y números rotados.
+- Se eliminó la exposición de la suma en JSON: `/api/contact/captcha` ahora devuelve `image` y `token`.
+- Se cambió el token para no incluir la respuesta directa; ahora guarda un hash firmado de la respuesta.
+- Se actualizó `ContactSection` para mostrar la imagen captcha y pedir el resultado de la suma.
+- Se agregaron validaciones HTML para nombre, empresa, correo, teléfono, mensaje y respuesta captcha.
+- Se reforzó `/api/contact` con validaciones server-side de longitud, email, teléfono, tipo de necesidad, mensaje y captcha numérico.
+- Se mantuvieron honeypot, tiempo mínimo de envío, captcha y rate limiting.
+
+**Archivos creados**
+- Ninguno.
+
+**Archivos modificados**
+- `docs/session-prompts-actions-summary.md`
+- `src/app/api/contact/route.ts`
+- `src/components/ContactSection.tsx`
+- `src/lib/contact-captcha.ts`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: OK con permiso de red para descarga de fuentes Google.

@@ -1,7 +1,5 @@
-type ServiceItem = {
-  title: string;
-  description: string;
-};
+import type { ServiceItem } from "@/data/site";
+import ResponsiveImage from "./ResponsiveImage";
 
 type ServicesProps = {
   items: ServiceItem[];
@@ -23,10 +21,15 @@ export default function Services({ items }: ServicesProps) {
           {items.map((item) => (
             <article
               key={item.title}
-              className="rounded-lg border border-[#D8E0E2] bg-white p-5 shadow-sm"
+              className="overflow-hidden rounded-lg border border-[#D8E0E2] bg-white shadow-md shadow-primary/10 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/15"
             >
-              <h3 className="font-heading text-lg font-semibold text-primary">{item.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-[#3A4950]">{item.description}</p>
+              {item.image ? (
+                <ResponsiveImage image={item.image} className="h-40 w-full" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
+              ) : null}
+              <div className="p-5">
+                <h3 className="font-heading text-lg font-semibold text-primary">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#3A4950]">{item.description}</p>
+              </div>
             </article>
           ))}
         </div>

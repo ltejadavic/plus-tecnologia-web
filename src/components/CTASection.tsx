@@ -24,13 +24,13 @@ export default function CTASection({ whatsappHref }: CTASectionProps) {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#C2851F]"
+            className="inline-flex items-center justify-center rounded-md bg-accent px-6 py-3 text-sm font-semibold text-white shadow-md shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#C2851F] hover:shadow-lg"
           >
             Cotizar por WhatsApp
           </a>
           <a
             href="#contacto"
-            className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+            className="inline-flex items-center justify-center rounded-md border border-white/30 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-md"
           >
             Ir al formulario
           </a>

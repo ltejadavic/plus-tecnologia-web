@@ -1,4 +1,5 @@
 import { productCategories } from "@/data/products";
+import ResponsiveImage from "./ResponsiveImage";
 
 export default function ProductCategories() {
   return (
@@ -21,18 +22,27 @@ export default function ProductCategories() {
           {productCategories.map((category) => (
             <article
               key={category.title}
-              className="rounded-lg border border-[#D8E0E2] bg-light p-5"
+              className="overflow-hidden rounded-lg border border-[#D8E0E2] bg-light shadow-sm shadow-primary/5 transition hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-primary/10"
             >
-              <h3 className="font-heading text-lg font-semibold text-primary">
-                {category.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-[#3A4950]">{category.description}</p>
-              <a
-                href="#contacto"
-                className="mt-4 inline-flex text-sm font-semibold text-primary underline decoration-primary/40 underline-offset-4 transition hover:decoration-primary"
-              >
-                {category.ctaText}
-              </a>
+              {category.image ? (
+                <ResponsiveImage
+                  image={category.image}
+                  className="h-40 w-full"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                />
+              ) : null}
+              <div className="p-5">
+                <h3 className="font-heading text-lg font-semibold text-primary">
+                  {category.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[#3A4950]">{category.description}</p>
+                <a
+                  href="#contacto"
+                  className="mt-4 inline-flex text-sm font-semibold text-primary underline decoration-primary/40 underline-offset-4 transition hover:text-secondary hover:decoration-secondary"
+                >
+                  {category.ctaText}
+                </a>
+              </div>
             </article>
           ))}
         </div>

@@ -29,7 +29,7 @@ export default function MobileMenu({
         aria-controls="mobile-navigation"
         aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
         onClick={() => setIsOpen((prev) => !prev)}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#D8E0E2] bg-white text-foreground transition hover:border-primary/35 hover:text-primary"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#D8E0E2] bg-white text-foreground shadow-sm transition hover:-translate-y-0.5 hover:border-primary/35 hover:text-primary hover:shadow-md"
       >
         <span className="sr-only">Menú</span>
         <span className="relative h-4 w-5">
@@ -54,7 +54,7 @@ export default function MobileMenu({
       {isOpen ? (
         <div
           id="mobile-navigation"
-          className="absolute left-0 right-0 top-full border-b border-[#D8E0E2] bg-white shadow-sm"
+          className="absolute left-0 right-0 top-full border-b border-[#D8E0E2] bg-white shadow-xl shadow-primary/10"
         >
           <nav aria-label="Navegación móvil" className="mx-auto max-w-6xl px-6 py-4">
             <ul className="flex flex-col gap-2">
@@ -63,7 +63,7 @@ export default function MobileMenu({
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-light"
+                    className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-light hover:text-primary hover:shadow-sm"
                   >
                     {item.label}
                   </Link>
@@ -76,7 +76,7 @@ export default function MobileMenu({
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex w-full items-center justify-center rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#C2851F]"
+                className="mt-3 inline-flex w-full items-center justify-center rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-accent/25 transition hover:-translate-y-0.5 hover:bg-[#C2851F] hover:shadow-lg"
               >
                 Cotizar por WhatsApp
               </a>
