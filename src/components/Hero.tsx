@@ -12,15 +12,18 @@ export default function Hero({ whatsappHref, image }: HeroProps) {
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-2 md:py-24">
         <div>
           <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-secondary">
-            Soporte técnico en filtración
+            Soluciones en filtración industrial
           </p>
-          <h1 className="font-heading text-4xl font-bold leading-tight text-primary sm:text-5xl">
-            Repuestos para filtración de combustible diésel, petróleo y fluidos industriales.
+          <h1 className="font-heading text-4xl font-bold leading-tight text-primary sm:text-4xl">
+            Experiencia en soluciones integrales para el tratamiento de fluidos industriales.
           </h1>
-          <p className="mt-6 max-w-xl text-base leading-7 text-[#3A4950] sm:text-lg">
-            En Plus Tecnología atendemos requerimientos técnicos de filtración con una
-            propuesta clara: entender tu necesidad, recomendar repuestos compatibles y
-            ayudarte a cotizar rápido.
+          <p className="copy-justified mt-6 max-w-xl text-base leading-7 text-[#3A4950] sm:text-lg">
+            Bienvenidos a Plus Tecnología, especialistas en filtración industrial,
+            combustibles líquidos / gaseosos, energía y minería.
+          </p>
+          <p className="copy-justified mt-4 max-w-xl text-base leading-7 text-[#3A4950]">
+            En Plus Tecnología atendemos sus requerimientos con una propuesta clara e inmediata.
+            Escuchar al cliente es el primer paso, continuamos levantando la información técnica  de sus procesos antes de enviar nuestra propuesta manteniendo la calidad como regla básica.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
@@ -56,10 +59,13 @@ export default function Hero({ whatsappHref, image }: HeroProps) {
               En qué te ayudamos
             </h2>
             <ul className="mt-4 space-y-3 text-sm leading-6 text-[#3A4950]">
-              <li>Definición de repuestos para filtración de diésel y petróleo.</li>
-              <li>Apoyo técnico para seleccionar líneas de filtración industrial.</li>
-              <li>Atención por WhatsApp para consultas y cotizaciones.</li>
-              <li>Propuestas enfocadas en tu requerimiento operativo.</li>
+              <li>
+                Soluciones flexibles de alta eficiencia para aplicaciones existentes o
+                nuevos proyectos.
+              </li>
+              <li>Soporte técnico aplicado en filtración de fluidos líquidos y gaseosos.</li>
+              <li>Alternativas orientadas a optimizar costos operativos y proteger activos.</li>
+              <li>Propuestas que benefician al cliente y al medio ambiente.</li>
             </ul>
           </div>
         </div>

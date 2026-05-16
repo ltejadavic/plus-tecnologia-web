@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import type { ImageSlot } from "@/data/site";
 import MobileMenu from "./MobileMenu";
 
 type NavItem = {
@@ -10,6 +12,7 @@ type NavbarProps = {
   brandName: string;
   navItems: NavItem[];
   whatsappHref: string;
+  logo?: ImageSlot;
 };
 
 function BrandMark() {
@@ -24,18 +27,34 @@ function BrandMark() {
   );
 }
 
-export default function Navbar({ brandName, navItems, whatsappHref }: NavbarProps) {
+export default function Navbar({ brandName, navItems, whatsappHref, logo }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-[#D8E0E2] bg-white/95 shadow-sm shadow-primary/5 backdrop-blur-sm">
-      <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-24 w-full max-w-6xl items-center justify-between px-6">
         <Link href="#home" className="flex items-center gap-3">
-          <BrandMark />
-          <div className="leading-tight">
-            <p className="font-heading text-lg font-bold tracking-tight text-primary">
-              Plus Tecnología
-            </p>
-            <p className="text-xs text-[#5C6B73]">Filtración industrial y repuestos</p>
-          </div>
+          {logo ? (
+            <>
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={192}
+                height={84}
+                className="h-auto w-36 object-contain sm:w-44 md:w-48"
+                priority
+              />
+              <span className="sr-only">{brandName}</span>
+            </>
+          ) : (
+            <>
+              <BrandMark />
+              <div className="leading-tight">
+                <p className="font-heading text-lg font-bold tracking-tight text-primary">
+                  {brandName}
+                </p>
+                <p className="text-xs text-[#5C6B73]">Filtración industrial y repuestos</p>
+              </div>
+            </>
+          )}
         </Link>
 
         <nav aria-label="Navegación principal" className="hidden md:block">

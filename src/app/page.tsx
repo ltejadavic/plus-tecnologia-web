@@ -15,6 +15,7 @@ export default function Home() {
         brandName={company.name}
         navItems={navItems}
         whatsappHref={company.whatsappHref}
+        logo={company.logo}
       />
       <main id="main-content">
         <Hero whatsappHref={company.whatsappHref} image={pageImages.hero} />

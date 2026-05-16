@@ -5,9 +5,11 @@ import type { ImageSlot } from "@/data/site";
 import ResponsiveImage from "./ResponsiveImage";
 
 const needOptions = [
-  "Repuestos de filtración",
+  "Elementos filtrantes",
+  "Elementos coalescentes",
+  "Carcasas de filtración",
+  "Soluciones paquetizadas",
   "Servicio técnico",
-  "Filtración de diésel/petróleo",
   "Otro",
 ];
 
@@ -115,8 +117,9 @@ export default function ContactSection({ whatsappHref, email, image }: ContactSe
               Solicita una cotización
             </h2>
             <p className="mt-4 text-sm leading-6 text-[#3A4950]">
-              Completa el formulario con tu requerimiento técnico. También puedes escribirnos
-              por WhatsApp o por correo.
+              Completa el formulario con tu requerimiento técnico de filtración,
+              tratamiento de fluidos o repuestos. También puedes escribirnos por WhatsApp
+              o por correo.
             </p>
           </div>
           {image ? (
@@ -311,7 +314,7 @@ export default function ContactSection({ whatsappHref, email, image }: ContactSe
             </h3>
             <p className="mt-3 text-sm leading-6 text-[#3A4950]">
               Si prefieres una atención rápida, usa WhatsApp. Si no, envíanos un correo
-              con tu requerimiento.
+              con la información técnica de tu proceso o equipo.
             </p>
 
             <div className="mt-5 flex flex-col gap-3">

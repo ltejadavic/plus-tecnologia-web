@@ -284,6 +284,140 @@ Registrar el contexto de trabajo de esta sesión: qué pidió el usuario en cada
 
 ---
 
+### 10) Prompt: adapt website copy to the new Plus Tecnología EIRL business text
+
+**Request**
+- Update the website copy using the new business material provided for Plus Tecnología EIRL.
+- Position the company as a provider of industrial filtration solutions, filtration spare parts, and technical support for industrial fluid treatment.
+- Include references to liquid/gaseous fuels, energy, mining, Oil & Gas, power generation, and industrial machinery.
+- Replace or adapt product/service categories with:
+  - Nominal and absolute filter elements.
+  - Liquid/liquid and liquid/gas coalescing elements.
+  - Filtration housings.
+  - Packaged filtration solutions.
+  - Engineering.
+  - Advisory and training services.
+  - Maintenance and assembly services.
+- Update the log in English with the changes and prompt context.
+
+**Actions**
+- Changed the central company name to `Plus Tecnología EIRL`.
+- Rewrote the Hero copy to focus on integrated industrial fluid treatment, industrial filtration, liquid/gaseous fuels, energy, mining, diesel, petroleum, and industrial fluids.
+- Updated the Hero support card to describe customer listening, technical information gathering, cost optimization, asset protection, and environmental benefit.
+- Rewrote the About section to describe experience in fluid treatment, industrial microfiltration, Oil & Gas, power generation, industrial machinery, and service since 1999.
+- Replaced product categories with the technical categories provided in the client text, while keeping quote-oriented CTAs.
+- Reworked service cards around engineering, advisory/training, and maintenance/assembly.
+- Updated CTA, contact form need options, footer copy, navbar branding, and SEO metadata to match the new positioning.
+- Normalized ambiguous marketing wording such as “maximizar costos” into clearer commercial copy around optimizing operating costs.
+
+**Files changed**
+- `docs/session-prompts-actions-summary.md`
+- `src/app/layout.tsx`
+- `src/components/About.tsx`
+- `src/components/ContactSection.tsx`
+- `src/components/CTASection.tsx`
+- `src/components/Footer.tsx`
+- `src/components/Hero.tsx`
+- `src/components/Navbar.tsx`
+- `src/components/ProductCategories.tsx`
+- `src/components/Services.tsx`
+- `src/data/products.ts`
+- `src/data/site.ts`
+
+**Validation**
+- `npm run lint`: OK.
+- `npm run build`: OK with network permission for Google Fonts.
+
+---
+
+### 11) Prompt: add proper image/logo management and reusable justified copy styling
+
+**Request**
+- Create an appropriate way to manage images and logos with the necessary folders and better practices.
+- Keep image placement simple by adding files where they belong and enabling them from the data configuration.
+- Replace repeated hardcoded text justification with a reusable approach.
+- Keep the manually reviewed copy intact.
+- Justify only descriptive content, not titles, including the service item descriptions.
+
+**Actions**
+- Added a versioned image folder structure under `public/images`:
+  - `logos/`
+  - `pages/`
+  - `products/`
+  - `services/`
+- Added `public/images/README.md` with placement and usage guidance for production assets.
+- Added `.gitkeep` files so the asset folders remain in the repository before real images are added.
+- Added `imageFolders` in `src/data/site.ts` to keep asset path conventions centralized.
+- Added optional `company.logo` configuration and updated `Navbar` to render a configured logo with `next/image`, while preserving the existing generated brand mark as fallback.
+- Replaced inline `style={{ textAlign: "justify" }}` usage with the reusable `.copy-justified` CSS utility.
+- Applied `.copy-justified` to the already selected justified body copy and to product/service descriptive paragraphs, leaving titles unmodified.
+
+**Files changed**
+- `docs/session-prompts-actions-summary.md`
+- `public/images/README.md`
+- `public/images/logos/.gitkeep`
+- `public/images/pages/.gitkeep`
+- `public/images/products/.gitkeep`
+- `public/images/services/.gitkeep`
+- `src/app/globals.css`
+- `src/app/page.tsx`
+- `src/components/About.tsx`
+- `src/components/Hero.tsx`
+- `src/components/Navbar.tsx`
+- `src/components/ProductCategories.tsx`
+- `src/components/Services.tsx`
+- `src/data/products.ts`
+- `src/data/site.ts`
+
+**Validation**
+- `npm run lint`: OK.
+- `npm run build`: OK with network permission for Google Fonts.
+
+---
+
+### 12) Prompt: use the newly added PNG logo in the website navbar
+
+**Request**
+- Keep the user's manually approved minor text changes.
+- Use the newly added logo file at `public/images/logos/image.png` as the website logo.
+
+**Actions**
+- Confirmed the logo asset exists at `public/images/logos/image.png`.
+- Enabled the logo from the centralized `company.logo` configuration in `src/data/site.ts`.
+- Adjusted the navbar logo rendering dimensions to better fit the PNG's rectangular aspect ratio.
+
+**Files changed**
+- `docs/session-prompts-actions-summary.md`
+- `src/components/Navbar.tsx`
+- `src/data/site.ts`
+
+**Validation**
+- `npm run lint`: OK.
+
+---
+
+### 13) Prompt: enlarge the navbar logo after replacing the PNG asset
+
+**Request**
+- The user replaced/cropped the logo image, but it still looked too small and was not easy to distinguish.
+- Preserve the user's manually approved text changes.
+
+**Actions**
+- Checked the current logo dimensions: `public/images/logos/image.png` is `665x292`.
+- Increased the navbar height from `h-20` to `h-24`.
+- Increased the rendered logo size with responsive widths.
+- Removed the visible duplicated brand text when a full logo image is configured, while keeping the brand name available to screen readers.
+- Preserved the generated brand mark and text fallback for cases where no logo is configured.
+
+**Files changed**
+- `docs/session-prompts-actions-summary.md`
+- `src/components/Navbar.tsx`
+
+**Validation**
+- `npm run lint`: OK.
+
+---
+
 ### 9) Prompt: refactorizar captcha visual y reforzar validaciones del formulario
 
 **Pedido**

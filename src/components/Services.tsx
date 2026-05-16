@@ -11,11 +11,15 @@ export default function Services({ items }: ServicesProps) {
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
         <div className="mb-10 max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
-            Servicios
+            Servicio técnico
           </p>
           <h2 className="mt-3 font-heading text-3xl font-bold text-primary">
-            Soporte técnico especializado
+            Soporte aplicado para cada etapa del requerimiento
           </h2>
+          <p className="copy-justified mt-4 text-sm leading-6 text-[#3A4950]">
+            No ofrecemos solo productos, acompañamos al cliente con ingeniería,
+            asesoramiento, capacitación, mantenimiento y montaje para soluciones a medida.
+          </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
@@ -28,7 +32,9 @@ export default function Services({ items }: ServicesProps) {
               ) : null}
               <div className="p-5">
                 <h3 className="font-heading text-lg font-semibold text-primary">{item.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-[#3A4950]">{item.description}</p>
+                <p className="copy-justified mt-3 text-sm leading-6 text-[#3A4950]">
+                  {item.description}
+                </p>
               </div>
             </article>
           ))}

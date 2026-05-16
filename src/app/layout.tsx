@@ -15,18 +15,21 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Plus Tecnología | Filtración Industrial",
-    template: "%s | Plus Tecnología",
+    default: "Plus Tecnología EIRL | Filtración Industrial",
+    template: "%s | Plus Tecnología EIRL",
   },
-  applicationName: "Plus Tecnología",
+  applicationName: "Plus Tecnología EIRL",
   description:
-    "Repuestos y servicios especializados para sistemas de filtración, combustible y fluidos industriales.",
+    "Soluciones, repuestos y soporte técnico para filtración industrial, combustibles líquidos y gaseosos, energía, minería y fluidos industriales.",
   keywords: [
-    "Plus Tecnología",
+    "Plus Tecnología EIRL",
     "filtración industrial",
+    "soluciones de filtración industrial",
     "filtros para combustible",
     "filtración diésel",
     "filtración de petróleo",
+    "tratamiento de fluidos industriales",
+    "microfiltración industrial",
     "separadores agua combustible",
     "repuestos de filtración",
     "cotización de filtros",
@@ -36,18 +39,18 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Plus Tecnología | Filtración Industrial",
+    title: "Plus Tecnología EIRL | Filtración Industrial",
     description:
-      "Soporte técnico y repuestos para sistemas de filtración de combustible diésel, petróleo y fluidos industriales.",
+      "Soluciones, soporte técnico y repuestos para filtración industrial de combustibles, petróleo y fluidos industriales.",
     type: "website",
     locale: "es_PE",
-    siteName: "Plus Tecnología",
+    siteName: "Plus Tecnología EIRL",
   },
   twitter: {
     card: "summary",
-    title: "Plus Tecnología | Filtración Industrial",
+    title: "Plus Tecnología EIRL | Filtración Industrial",
     description:
-      "Repuestos y soporte técnico para filtración de combustible diésel, petróleo y fluidos industriales.",
+      "Soluciones, repuestos y soporte técnico para filtración industrial de combustibles y fluidos industriales.",
   },
 };
 

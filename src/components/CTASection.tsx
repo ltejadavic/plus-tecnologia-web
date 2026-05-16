@@ -15,7 +15,8 @@ export default function CTASection({ whatsappHref }: CTASectionProps) {
           </h2>
           <p className="mt-4 text-sm leading-6 text-[#D7E5E8]">
             Escríbenos por WhatsApp o completa el formulario con tu necesidad de
-            filtración. Te contactaremos con una propuesta acorde al requerimiento.
+            filtración industrial. Revisaremos la información técnica y te contactaremos
+            con una propuesta acorde al requerimiento.
           </p>
         </div>
 

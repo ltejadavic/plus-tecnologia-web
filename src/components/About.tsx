@@ -14,13 +14,15 @@ export default function About({ image }: AboutProps) {
             Sobre nosotros
           </p>
           <h2 className="mt-3 font-heading text-3xl font-bold text-primary">
-            Un equipo pequeño enfocado en soporte técnico aplicado.
+            Un equipo altamente calificado con experiencia en tratamiento de fluidos y microfiltración industrial.
           </h2>
-          <p className="mt-5 text-base leading-7 text-[#3A4950]">
-            Plus Tecnología nace para atender necesidades puntuales de filtración en
-            combustible diésel, petróleo y fluidos industriales. Trabajamos con atención
-            directa, lenguaje técnico claro y enfoque en cotizaciones bien definidas
-            según cada aplicación.
+          <p className="copy-justified mt-5 text-base leading-7 text-[#3A4950]">
+            Plus Tecnología nace para atender necesidades específicas en el
+            tratamiento y filtración de fluidos industriales líquidos y gaseosos en los
+            sectores Oil & Gas, generación de energía y maquinaria industrial.
+          </p>
+          <p className="copy-justified mt-4 text-base leading-7 text-[#3A4950]">
+            Desde 1999 al servicio de la industria nacional e internacional, con atención directa, lenguaje claro y enfoque de protección de activos FTAP y maximizar sus costos operativos CAPEX.
           </p>
         </div>
         {image ? (

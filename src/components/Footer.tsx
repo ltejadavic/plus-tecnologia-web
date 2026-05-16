@@ -17,8 +17,8 @@ export default function Footer({
         <div>
           <p className="font-heading text-lg font-semibold text-white">{companyName}</p>
           <p className="mt-3 leading-6">
-            Soporte técnico y repuestos para filtración de combustible diésel, petróleo y
-            fluidos industriales.
+            Soluciones en filtración industrial, repuestos y soporte técnico para
+            tratamiento de fluidos en Oil & Gas, energía, minería y maquinaria industrial.
           </p>
         </div>
 
