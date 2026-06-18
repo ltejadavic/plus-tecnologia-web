@@ -30,7 +30,7 @@ export default function EnvironmentalClose({ image }: EnvironmentalCloseProps) {
           </h2>
           <p className="mt-4 text-sm leading-6 text-[#D7E5E8]">
             Una filtración bien seleccionada ayuda a cuidar equipos, controlar consumos y
-            sostener operaciones industriales con criterios técnicos y ambientales claros.
+            sostener operaciones industriales con criterios técnicos y objetivos medio ambientales claros.
           </p>
         </div>
       </div>
