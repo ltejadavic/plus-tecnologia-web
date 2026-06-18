@@ -1,11 +1,26 @@
+import Image from "next/image";
+import type { ImageSlot } from "@/data/site";
+
 type CTASectionProps = {
   whatsappHref: string;
+  image?: ImageSlot;
 };
 
-export default function CTASection({ whatsappHref }: CTASectionProps) {
+export default function CTASection({ whatsappHref, image }: CTASectionProps) {
   return (
-    <section id="cotizar" className="bg-primary">
-      <div className="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-6 px-6 py-14 md:flex-row md:items-center">
+    <section id="cotizar" className="relative overflow-hidden bg-primary">
+      {image ? (
+        <Image
+          src={image.src}
+          alt=""
+          fill
+          sizes="100vw"
+          aria-hidden="true"
+          className="object-cover opacity-35 mix-blend-luminosity"
+        />
+      ) : null}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/70" />
+      <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-6 px-6 py-16 md:flex-row md:items-center md:py-20">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-[#A8C8B4]">
             Cotizaciones

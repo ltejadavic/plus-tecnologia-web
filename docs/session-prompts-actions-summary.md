@@ -451,3 +451,273 @@ Registrar el contexto de trabajo de esta sesión: qué pidió el usuario en cada
 **Validación**
 - `npm run lint`: OK.
 - `npm run build`: OK con permiso de red para descarga de fuentes Google.
+
+---
+
+### 14) Prompt: revisar cambios manuales, optimizar imágenes nuevas y agregar carruseles
+
+**Pedido**
+- Revisar primero posibles cambios manuales y aceptarlos como correctos.
+- Usar las imágenes agregadas bajo `Images/`, reconociendo su correspondencia por carpetas.
+- Optimizar y normalizar las imágenes que se usarán en productos y servicios.
+- Agregar carruseles en los recuadros correspondientes, con pausa al hacer hover.
+- Usar un tiempo adecuado de transición entre imágenes.
+- Agregar CTAs hacia la sección de contacto con una frase comercial adecuada.
+- Actualizar la bitácora.
+
+**Acciones**
+- Se revisó `git status` antes de editar: solo existía la carpeta manual nueva `Images/` sin archivos rastreados modificados.
+- Se mapearon las carpetas nuevas:
+  - `Elementos Filtrantes` a elementos filtrantes y coalescentes.
+  - `Carcasas` a carcasas, repuestos y mantenimiento.
+  - `Equipos` a soluciones paquetizadas, repuestos y servicio técnico.
+  - `Panoramicas` a servicios de ingeniería y asesoramiento/capacitación.
+- Se generaron copias web optimizadas bajo `public/images/products` y `public/images/services`.
+- Se normalizaron 27 imágenes JPEG a `640x420` con fondo claro y pesos aproximados entre 24 KB y 112 KB.
+- Se agregó `ImageCarousel`, un componente cliente reutilizable con transición de 700 ms, avance cada 4.2 s, pausa con hover/focus y respeto por `prefers-reduced-motion`.
+- Se extendieron los datos de productos y servicios con `images?: ImageSlot[]`.
+- Se conectaron carruseles en tarjetas de productos y servicios, manteniendo el soporte anterior para una sola imagen.
+- Se actualizó el CTA de productos a `Solicitar cotización técnica`.
+- Se agregó CTA en servicios con `Solicitar evaluación técnica`.
+
+**Archivos creados**
+- `src/components/ImageCarousel.tsx`
+- `public/images/products/elementos-filtrantes/*.jpg`
+- `public/images/products/carcasas-filtracion/*.jpg`
+- `public/images/products/soluciones-paquetizadas/*.jpg`
+- `public/images/services/ingenieria/*.jpg`
+- `public/images/services/asesoramiento-capacitacion/*.jpg`
+- `public/images/services/mantenimiento-montaje/*.jpg`
+
+**Archivos modificados**
+- `docs/session-prompts-actions-summary.md`
+- `src/components/ProductCategories.tsx`
+- `src/components/Services.tsx`
+- `src/data/products.ts`
+- `src/data/site.ts`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: falló en sandbox restringido por descarga de Google Fonts.
+- `npm run build` con permiso de red: OK.
+- `npm run build`: falló en sandbox restringido por descarga de Google Fonts.
+- `npm run build` con permiso de red: OK.
+- `npm run dev -- --port 3000`: OK con permiso para escuchar en localhost.
+- Verificación HTTP con `curl`: página e imágenes principales responden `200 OK`.
+- Verificación de dimensiones: todas las imágenes procesadas responden como JPEG `640x420`.
+- La inspección visual con Browser no pudo ejecutarse porque no había navegador `iab` disponible en esta sesión.
+
+---
+
+### 15) Prompt: corregir warning de hidratación causado por extensión del navegador
+
+**Pedido**
+- Revisar el error de consola de Next.js sobre atributos del HTML del servidor que no coinciden con el cliente.
+- El diff mostrado indica atributos agregados al `<body>` por una extensión: `data-new-gr-c-s-check-loaded` y `data-gr-ext-installed`.
+
+**Acciones**
+- Se confirmó que el mismatch ocurre en `src/app/layout.tsx` sobre el elemento `<body>`.
+- Se agregó `suppressHydrationWarning` al `<body>` para evitar que React reporte diferencias de atributos inyectados externamente por extensiones del navegador.
+- No se modificó la lógica de los carruseles ni datos del sitio.
+
+**Archivos modificados**
+- `docs/session-prompts-actions-summary.md`
+- `src/app/layout.tsx`
+
+**Validación**
+- `npm run lint`: OK.
+
+---
+
+### 16) Prompt: analizar todas las imágenes originales y documentar contenido
+
+**Pedido**
+- Revisar todas las imágenes dentro de la carpeta nueva de imágenes.
+- Identificar visualmente los objetos o el contexto de cada imagen.
+- Generar un documento con carpeta, nombre, ruta y descripción breve.
+
+**Acciones**
+- Se inventariaron 55 imágenes bajo `Images/Filtracion - Panel`.
+- Se generaron hojas de contacto temporales por carpeta para revisar visualmente cada archivo.
+- Se clasificó el contenido por las carpetas originales:
+  - `Carcasas`
+  - `Elementos Filtrantes`
+  - `Equipos`
+  - `Panoramicas`
+- Se creó un documento Markdown con resumen por carpeta y tabla completa de imágenes.
+- Se marcó `Picture50.png` de `Panoramicas` como imagen de naturaleza sin relación directa con filtración industrial.
+
+**Archivos creados**
+- `docs/image-analysis-inventory.md`
+
+**Archivos modificados**
+- `docs/session-prompts-actions-summary.md`
+
+**Validación**
+- Conteo de imágenes en origen: 55.
+- Conteo de entradas `Picture*.png` en el documento: 55.
+
+---
+
+### 17) Prompt: revisar ubicación de imágenes, retirar panorámicas de carruseles y mejorar ambientación visual
+
+**Pedido**
+- Verificar que cada imagen usada en carruseles esté correctamente ubicada según su contenido.
+- Retirar de carruseles las panorámicas que no correspondan a un apartado técnico directo.
+- Actuar como diseñador senior para decidir qué imágenes ayudan a mejorar la página.
+- Reemplazar la imagen temporal con formas geométricas del inicio por una imagen más adecuada.
+- Procesar desde las fuentes originales las imágenes de ambientación con tamaños y calidad adecuados.
+- Usar sombras, overlays o tratamientos visuales según criterio, manteniendo el sentido corporativo industrial del sitio.
+
+**Acciones**
+- Se creó `docs/image-placement-review.md` con la revisión de ubicación, decisiones de uso, imágenes retiradas y exclusiones.
+- Se mantuvieron los carruseles de productos con imágenes de elementos filtrantes, carcasas y equipos.
+- Se retiraron panorámicas de los carruseles de servicios:
+  - Minería y maquinaria pesada antes usadas en Ingeniería.
+  - Plantas panorámicas antes usadas en Asesoramiento y capacitación.
+- Se reemplazaron las imágenes de servicios por material técnico:
+  - Ingeniería: planos, corte técnico de carcasa y equipo/skid.
+  - Asesoramiento y capacitación: elementos filtrantes, interior de carcasa y equipo móvil.
+  - Mantenimiento y montaje: componentes y equipos vinculados a intervención técnica.
+- Se excluyó `Panoramicas/Picture50.png` del sitio principal porque la rana rompe el tono B2B industrial, aunque se documentó como posible material futuro para una pieza ambiental.
+- Se generaron nuevas imágenes procesadas desde originales:
+  - `public/images/pages/hero-planta-fluidos.jpg`
+  - `public/images/pages/about-planta-industrial.jpg`
+  - `public/images/pages/cta-planta-nocturna.jpg`
+  - `public/images/pages/contacto-carcasas-filtracion.jpg`
+  - Nuevas imágenes técnicas en `public/images/services/ingenieria/`
+  - Nuevas imágenes técnicas en `public/images/services/asesoramiento-capacitacion/`
+- Se configuró el Hero con imagen industrial real, overlay y texto sobre gradiente, reemplazando las formas geométricas temporales.
+- Se configuró la sección Nosotros con imagen industrial contextual.
+- Se configuró el CTA con una imagen nocturna de planta industrial como fondo con overlay oscuro.
+- Se configuró Contacto con una imagen técnica de carcasas de filtración.
+- Se eliminaron las copias JPEG panorámicas generadas previamente en carpetas de servicios que ya no se usan.
+
+**Archivos creados**
+- `docs/image-placement-review.md`
+- `public/images/pages/hero-planta-fluidos.jpg`
+- `public/images/pages/about-planta-industrial.jpg`
+- `public/images/pages/cta-planta-nocturna.jpg`
+- `public/images/pages/contacto-carcasas-filtracion.jpg`
+- `public/images/services/ingenieria/ingenieria-plano-01.jpg`
+- `public/images/services/ingenieria/ingenieria-plano-02.jpg`
+- `public/images/services/ingenieria/ingenieria-corte-01.jpg`
+- `public/images/services/ingenieria/ingenieria-equipo-01.jpg`
+- `public/images/services/asesoramiento-capacitacion/asesoramiento-elementos-01.jpg`
+- `public/images/services/asesoramiento-capacitacion/asesoramiento-carcasa-01.jpg`
+- `public/images/services/asesoramiento-capacitacion/asesoramiento-equipo-01.jpg`
+
+**Archivos modificados**
+- `docs/session-prompts-actions-summary.md`
+- `src/app/page.tsx`
+- `src/components/CTASection.tsx`
+- `src/components/Hero.tsx`
+- `src/data/site.ts`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: falló en sandbox restringido por descarga de Google Fonts.
+- `npm run build` con permiso de red: OK.
+- Verificación de rutas y dimensiones de imágenes procesadas: OK.
+
+---
+
+### 18) Prompt: alinear botones de tarjetas e integrar la rana como cierre visual
+
+**Pedido**
+- Aceptar un pequeño cambio manual realizado por el usuario y continuar desde allí.
+- Corregir las tarjetas de productos/servicios para que tengan el mismo tamaño y los botones queden a la misma altura.
+- Asegurar que, si hace falta, las tarjetas ganen espacio inferior sin desalinear botones.
+- Agregar hover a los botones invirtiendo color de fondo y texto.
+- Incorporar la imagen de la rana en la parte final con difuminado/transparencia para que se sienta integrada al sitio.
+
+**Acciones**
+- Se aceptó el estado manual existente sin revertir cambios.
+- Se configuraron las grillas de productos y servicios con `auto-rows-fr`.
+- Se convirtió cada tarjeta en contenedor `flex h-full flex-col`.
+- Se convirtió el contenido interno en columna flexible y se empujó el CTA al final con `mt-auto`.
+- Se agregó separación fija sobre el CTA con `pt-4`.
+- Se ajustó el hover de botones:
+  - Productos: fondo primario y texto blanco; en hover, fondo blanco y texto primario.
+  - Servicios: fondo blanco y texto primario; en hover, fondo primario y texto blanco.
+- Se procesó `Images/Filtracion - Panel/Panoramicas/Picture50.png` como `public/images/pages/environment-rana-banner.jpg` en `1200x378`.
+- Se creó `EnvironmentalClose` como cierre visual con imagen de fondo, overlay oscuro, transparencia, saturación y difuminado leve.
+- Se actualizó `docs/image-placement-review.md` para registrar que la rana no se usa en carruseles técnicos sino como cierre ambiental tratado.
+
+**Archivos creados**
+- `src/components/EnvironmentalClose.tsx`
+- `public/images/pages/environment-rana-banner.jpg`
+
+**Archivos modificados**
+- `docs/image-placement-review.md`
+- `docs/session-prompts-actions-summary.md`
+- `src/app/page.tsx`
+- `src/components/ProductCategories.tsx`
+- `src/components/Services.tsx`
+- `src/data/site.ts`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: falló en sandbox restringido por descarga de Google Fonts.
+- `npm run build` con permiso de red: OK.
+
+---
+
+### 19) Prompt: retirar redundancia entre cotizaciones/contacto, ajustar rana completa y marcar sección activa
+
+**Pedido**
+- Aceptar cambios manuales pequeños y continuar desde el estado actual.
+- Quitar la imagen que aparecía en Contacto.
+- Hacer que la imagen de la rana se vea completa en el cierre ambiental, manteniendo difuminado y tratamiento visual.
+- Retirar la sección de Cotizaciones previa a Contacto por redundancia.
+- Agregar indicador o sombreado en el navbar para saber en qué sección está el usuario.
+
+**Acciones**
+- Se aceptó el estado existente sin revertir cambios manuales.
+- Se retiró `CTASection` del flujo de la página para evitar duplicidad con Contacto.
+- Se retiró la imagen lateral de `ContactSection` y se simplificó el encabezado de la sección.
+- Se limpió `pageImages` para dejar activos solo `hero`, `about` y `environment`.
+- Se ajustó `EnvironmentalClose` para usar `object-contain object-right`, de modo que la imagen completa de la rana se vea dentro del cierre ambiental.
+- Se convirtió `Navbar` en componente cliente para observar secciones con `IntersectionObserver`.
+- Se agregó `aria-current` y sombreado activo a los enlaces del navbar desktop.
+- Se propagó `activeHref` al menú móvil para mostrar también la sección activa en mobile.
+- Se actualizó `docs/image-placement-review.md` marcando las imágenes de cotización/contacto como procesadas pero no activas.
+
+**Archivos modificados**
+- `docs/image-placement-review.md`
+- `docs/session-prompts-actions-summary.md`
+- `src/app/page.tsx`
+- `src/components/ContactSection.tsx`
+- `src/components/EnvironmentalClose.tsx`
+- `src/components/MobileMenu.tsx`
+- `src/components/Navbar.tsx`
+- `src/data/site.ts`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: falló en sandbox restringido por descarga de Google Fonts.
+- `npm run build` con permiso de red: OK.
+
+---
+
+### 20) Prompt: corregir sombreado activo del navbar en productos
+
+**Pedido**
+- Revisar por qué al entrar en la sección de productos no se sombreaba `Productos` en el navbar, mientras otras secciones sí lo hacían.
+
+**Acciones**
+- Se confirmó que `#productos` existe y coincide con el `href` del navbar.
+- Se reemplazó la lógica basada en `IntersectionObserver` por un cálculo de scroll con offset del navbar.
+- Se marca como activa la última sección cuyo `offsetTop` ya fue alcanzado por la posición visible de la página.
+- Se agregó actualización por `scroll`, `resize` y `hashchange`.
+- Se agregó actualización inmediata al hacer clic sobre un enlace del navbar desktop.
+- Se conserva `aria-current` para accesibilidad.
+
+**Archivos modificados**
+- `docs/session-prompts-actions-summary.md`
+- `src/components/Navbar.tsx`
+
+**Validación**
+- `npm run lint`: OK.
+- `npm run build`: falló en sandbox restringido por descarga de Google Fonts.
+- `npm run build` con permiso de red: OK.

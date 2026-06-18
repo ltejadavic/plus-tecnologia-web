@@ -1,6 +1,6 @@
 import About from "@/components/About";
 import ContactSection from "@/components/ContactSection";
-import CTASection from "@/components/CTASection";
+import EnvironmentalClose from "@/components/EnvironmentalClose";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Navbar from "@/components/Navbar";
@@ -22,12 +22,11 @@ export default function Home() {
         <About image={pageImages.about} />
         <ProductCategories />
         <Services items={services} />
-        <CTASection whatsappHref={company.whatsappHref} />
         <ContactSection
           whatsappHref={company.whatsappHref}
           email={company.email}
-          image={pageImages.contact}
         />
+        <EnvironmentalClose image={pageImages.environment} />
       </main>
       <Footer
         companyName={company.name}

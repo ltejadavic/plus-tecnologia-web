@@ -1,8 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import type { ImageSlot } from "@/data/site";
-import ResponsiveImage from "./ResponsiveImage";
 
 const needOptions = [
   "Elementos filtrantes",
@@ -16,7 +14,6 @@ const needOptions = [
 type ContactSectionProps = {
   whatsappHref: string;
   email: string;
-  image?: ImageSlot;
 };
 
 const LABEL_CLASS = "mb-2 block text-sm font-medium text-foreground";
@@ -35,7 +32,7 @@ type ContactApiResponse = {
   message: string;
 };
 
-export default function ContactSection({ whatsappHref, email, image }: ContactSectionProps) {
+export default function ContactSection({ whatsappHref, email }: ContactSectionProps) {
   const [captcha, setCaptcha] = useState<CaptchaChallenge | null>(null);
   const [startedAt, setStartedAt] = useState(() => Date.now());
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -108,27 +105,18 @@ export default function ContactSection({ whatsappHref, email, image }: ContactSe
   return (
     <section id="contacto" className="bg-light">
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
-        <div className="mb-8 grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-end">
-          <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
-              Contacto
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-primary">
-              Solicita una cotización
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-[#3A4950]">
-              Completa el formulario con tu requerimiento técnico de filtración,
-              tratamiento de fluidos o repuestos. También puedes escribirnos por WhatsApp
-              o por correo.
-            </p>
-          </div>
-          {image ? (
-            <ResponsiveImage
-              image={image}
-              className="h-48 w-full rounded-lg border border-[#D8E0E2] object-cover shadow-lg shadow-primary/10 md:h-56"
-              sizes="(min-width: 768px) 35vw, 100vw"
-            />
-          ) : null}
+        <div className="mb-8 max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-wide text-secondary">
+            Contacto
+          </p>
+          <h2 className="mt-3 font-heading text-3xl font-bold text-primary">
+            Solicita una cotización
+          </h2>
+          <p className="mt-4 text-sm leading-6 text-[#3A4950]">
+            Completa el formulario con tu requerimiento técnico de filtración,
+            tratamiento de fluidos o repuestos. También puedes escribirnos por WhatsApp
+            o por correo.
+          </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr]">

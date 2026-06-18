@@ -45,7 +45,20 @@ export default function Hero({ whatsappHref, image }: HeroProps) {
 
         <div className="overflow-hidden rounded-lg border border-[#D8E0E2] bg-white shadow-xl shadow-primary/10">
           {image ? (
-            <ResponsiveImage image={image} className="h-56 w-full" sizes="(min-width: 768px) 50vw, 100vw" />
+            <div className="relative">
+              <ResponsiveImage
+                image={image}
+                className="h-72 w-full"
+                imageClassName="brightness-[0.82] saturate-[0.95]"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/15 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5">
+                <p className="mt-1 max-w-sm text-sm font-semibold leading-5 text-white">
+                  Tratamiento de fluidos para operaciones exigentes.
+                </p>
+              </div>
+            </div>
           ) : (
             <div className="relative h-56 overflow-hidden bg-primary" aria-hidden="true">
               <span className="absolute -left-10 top-10 h-28 w-56 rotate-[-18deg] rounded-full bg-secondary/70" />

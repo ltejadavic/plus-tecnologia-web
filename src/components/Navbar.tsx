@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import type { ImageSlot } from "@/data/site";
 import MobileMenu from "./MobileMenu";
 
@@ -28,6 +31,64 @@ function BrandMark() {
 }
 
 export default function Navbar({ brandName, navItems, whatsappHref, logo }: NavbarProps) {
+  const [activeHref, setActiveHref] = useState(navItems[0]?.href || "#home");
+
+  useEffect(() => {
+    const sections = navItems
+      .map((item) => ({
+        href: item.href,
+        section: document.getElementById(item.href.replace("#", "")),
+      }))
+      .filter((item): item is { href: string; section: HTMLElement } =>
+        Boolean(item.section),
+      );
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    let animationFrame = 0;
+
+    function updateActiveSection() {
+      const navbarOffset = 128;
+      const viewportPosition = window.scrollY + navbarOffset;
+      const pageBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+      if (pageBottom) {
+        setActiveHref(sections[sections.length - 1].href);
+        return;
+      }
+
+      const currentSection = sections.reduce((current, item) => {
+        if (item.section.offsetTop <= viewportPosition) {
+          return item;
+        }
+
+        return current;
+      }, sections[0]);
+
+      setActiveHref(currentSection.href);
+    }
+
+    function scheduleUpdate() {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(updateActiveSection);
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("hashchange", scheduleUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      window.removeEventListener("hashchange", scheduleUpdate);
+    };
+  }, [navItems]);
+
   return (
     <header className="sticky top-0 z-40 border-b border-[#D8E0E2] bg-white/95 shadow-sm shadow-primary/5 backdrop-blur-sm">
       <div className="mx-auto flex h-24 w-full max-w-6xl items-center justify-between px-6">
@@ -63,7 +124,13 @@ export default function Navbar({ brandName, navItems, whatsappHref, logo }: Navb
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:-translate-y-0.5 hover:bg-light hover:text-primary hover:shadow-md hover:shadow-primary/10"
+                  aria-current={activeHref === item.href ? "page" : undefined}
+                  onClick={() => setActiveHref(item.href)}
+                  className={`rounded-md px-3 py-2 text-sm font-medium transition hover:-translate-y-0.5 hover:bg-light hover:text-primary hover:shadow-md hover:shadow-primary/10 ${
+                    activeHref === item.href
+                      ? "bg-light text-primary shadow-md shadow-primary/10"
+                      : "text-foreground"
+                  }`}
                 >
                   {item.label}
                 </Link>
@@ -87,6 +154,7 @@ export default function Navbar({ brandName, navItems, whatsappHref, logo }: Navb
           brandName={brandName}
           navItems={navItems}
           whatsappHref={whatsappHref}
+          activeHref={activeHref}
         />
       </div>
     </header>

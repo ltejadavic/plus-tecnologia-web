@@ -1,4 +1,5 @@
 import { productCategories } from "@/data/products";
+import ImageCarousel from "./ImageCarousel";
 import ResponsiveImage from "./ResponsiveImage";
 
 export default function ProductCategories() {
@@ -19,32 +20,39 @@ export default function ProductCategories() {
           </p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {productCategories.map((category) => (
             <article
               key={category.title}
-              className="overflow-hidden rounded-lg border border-[#D8E0E2] bg-light shadow-sm shadow-primary/5 transition hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-primary/10"
+              className="flex h-full flex-col overflow-hidden rounded-lg border border-[#D8E0E2] bg-light shadow-sm shadow-primary/5 transition hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-primary/10"
             >
-              {category.image ? (
+              {category.images?.length ? (
+                <ImageCarousel
+                  images={category.images}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                />
+              ) : category.image ? (
                 <ResponsiveImage
                   image={category.image}
-                  className="h-40 w-full"
+                  className="aspect-[32/21] w-full"
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 />
               ) : null}
-              <div className="p-5">
+              <div className="flex flex-1 flex-col p-5">
                 <h3 className="font-heading text-lg font-semibold text-primary">
                   {category.title}
                 </h3>
                 <p className="copy-justified mt-3 text-sm leading-6 text-[#3A4950]">
                   {category.description}
                 </p>
-                <a
-                  href="#contacto"
-                  className="mt-4 inline-flex text-sm font-semibold text-primary underline decoration-primary/40 underline-offset-4 transition hover:text-secondary hover:decoration-secondary"
-                >
-                  {category.ctaText}
-                </a>
+                <div className="mt-auto pt-4">
+                  <a
+                    href="#contacto"
+                    className="inline-flex w-fit items-center rounded-md border border-primary bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-primary/15 transition hover:-translate-y-0.5 hover:bg-white hover:text-primary hover:shadow-md hover:shadow-primary/20"
+                  >
+                    {category.ctaText}
+                  </a>
+                </div>
               </div>
             </article>
           ))}

@@ -12,12 +12,14 @@ type MobileMenuProps = {
   brandName: string;
   navItems: NavItem[];
   whatsappHref: string;
+  activeHref: string;
 };
 
 export default function MobileMenu({
   brandName,
   navItems,
   whatsappHref,
+  activeHref,
 }: MobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,7 +65,12 @@ export default function MobileMenu({
                   <Link
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="block rounded-md px-3 py-2 text-sm font-medium text-foreground transition hover:bg-light hover:text-primary hover:shadow-sm"
+                    aria-current={activeHref === item.href ? "page" : undefined}
+                    className={`block rounded-md px-3 py-2 text-sm font-medium transition hover:bg-light hover:text-primary hover:shadow-sm ${
+                      activeHref === item.href
+                        ? "bg-light text-primary shadow-sm"
+                        : "text-foreground"
+                    }`}
                   >
                     {item.label}
                   </Link>

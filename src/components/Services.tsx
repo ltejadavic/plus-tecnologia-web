@@ -1,4 +1,5 @@
 import type { ServiceItem } from "@/data/site";
+import ImageCarousel from "./ImageCarousel";
 import ResponsiveImage from "./ResponsiveImage";
 
 type ServicesProps = {
@@ -21,20 +22,37 @@ export default function Services({ items }: ServicesProps) {
             asesoramiento, capacitación, mantenimiento y montaje para soluciones a medida.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item) => (
             <article
               key={item.title}
-              className="overflow-hidden rounded-lg border border-[#D8E0E2] bg-white shadow-md shadow-primary/10 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/15"
+              className="flex h-full flex-col overflow-hidden rounded-lg border border-[#D8E0E2] bg-white shadow-md shadow-primary/10 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/15"
             >
-              {item.image ? (
-                <ResponsiveImage image={item.image} className="h-40 w-full" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
+              {item.images?.length ? (
+                <ImageCarousel
+                  images={item.images}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                />
+              ) : item.image ? (
+                <ResponsiveImage
+                  image={item.image}
+                  className="aspect-[32/21] w-full"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                />
               ) : null}
-              <div className="p-5">
+              <div className="flex flex-1 flex-col p-5">
                 <h3 className="font-heading text-lg font-semibold text-primary">{item.title}</h3>
                 <p className="copy-justified mt-3 text-sm leading-6 text-[#3A4950]">
                   {item.description}
                 </p>
+                <div className="mt-auto pt-4">
+                  <a
+                    href="#contacto"
+                    className="inline-flex w-fit items-center rounded-md border border-primary bg-white px-4 py-2 text-sm font-semibold text-primary shadow-sm transition hover:-translate-y-0.5 hover:bg-primary hover:text-white hover:shadow-md"
+                  >
+                    Solicitar evaluación técnica
+                  </a>
+                </div>
               </div>
             </article>
           ))}
